@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>Otto Fly</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="img/favicon.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="js/index.js"></script>
+  <link href="css/themeStyle.css" rel="stylesheet" type="text/css" >
+  <link href="css/style.css" rel="stylesheet" type="text/css" >
+</head>
+<body>
+  <!--Nav Bar-->
+    <header class="site-header">
+        <div class="top">
+            <div class="container">
+                <div class="row">
+                    <div id="user-name">
+                        <p>Welcome
+                            @if(Session::has('email'))
+                            {{Session::get('email')}}
+                            @else
+                            User
+                            @endif
+                            @if(Session::has('email'))
+                            <a href="{{ route('logout') }}">Logout</a>
+                            @endif
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <a href="home" class="navbar-brand">
+                        <img src="img/logo_flight.png" alt="Logo" />
+                    </a>
+                    <a href="home" class="navbar-brand logo-text">
+                        Otto Fly
+                    </a>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+                    <ul class="nav navbar-nav main-navbar-nav">
+                        <li ><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('faq') }}">FAQ</a></li>
+                        <li><a href="{{ route('raiseTicket') }}">Raise Ticket</a></li>
+                        <li><a href="{{ route('viewTickets.index') }}">View Tickets</a></li></ul>
+                </div><!-- /.navbar-collapse -->
+                <!-- END MAIN NAVIGATION -->
+            </div>
+        </nav>
+    </header>
+    <!--Body-->
+    <body>
+        <div class="container">
+            <br/>
+            <div class="form-group">
+                <strong><h3 class="navbar-brand logo-text">Search Menu Items</h3><br/></strong>
+                <input id="search" autofocus class="form-control" type="text" onkeyup="getMenuItems(this.value)" placeholder="Search">
+                <div id="autocomplete"></div>
+            </div>
+            <br/>
+            <div class="tickets">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>#</th>
+                        <th>Issue Id</th>
+                        <th>Name</th>
+                        <th>Software Issue</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    @foreach ($tickets as $ticket)
+                    <tr>
+                        <td>{{ ++$i }}</td>
+                        <td>TCK-{{$ticket->id}}</td>
+                        <td><a href="{{ route('viewTickets.show',$ticket->id) }}">{{$ticket->name}}</a>
+                        </td>
+                        <td>{{$ticket->software_issue}}</td>
+                        <td>{{$ticket->status}}</td>
+                        <td>
+                            <a href="{{ route('viewTickets.show',$ticket->id) }}" class="btn btn-info">
+                                <span class="glyphicon glyphicon-eye-open"></span> View
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+                {!! $tickets->render() !!} <!--for pagination-->
+            </div>
+        </div>
+        @endsection
+    </body>
+    <!--Footer-->
+    <footer class="site-footer">
+        <div id="copyright">
+            <div class="container">
+                <p class="pull-left">&copy; 2017 RMIT</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

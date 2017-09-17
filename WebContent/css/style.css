@@ -1,0 +1,26 @@
+#user-name, .request-submit-button{
+    float: right;
+}
+.request-form{
+    padding: 2%;
+}
+#home-page-image {
+    width: 100%;
+    padding-top: 1%;
+}
+.question {
+    font-size: large;
+    font-style: italic;
+    font-weight: bold;
+    color: #e60028;
+}
+.faq-container, .tickets {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.logo-text {
+    font-size: 45px;
+    padding-top: 35px;
+    font-family: Brush Script MT;
+}
