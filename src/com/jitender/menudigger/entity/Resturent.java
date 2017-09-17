@@ -1,3 +1,5 @@
+package com.jitender.menudigger.entity;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
